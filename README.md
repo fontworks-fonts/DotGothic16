@@ -31,6 +31,10 @@ Change the current working directory to 'DotGothic16' folder and run **build.py*
 
     $ python build.py
 
+If the **--autohinting** command line option is specified, it will add hinting with ttfautohint.
+
+    $ python build.py --autohinting
+
 
 ### Licence
 
