@@ -22,10 +22,15 @@ for font in Path("master_ttf").glob("*.ttf"):
     modifiedFont["DSIG"].usFlag = 0
     modifiedFont["DSIG"].usNumSigs = 0
     modifiedFont["DSIG"].signatureRecords = []
+    
+    print ("["+str(font).split("/")[1][:-4]+"] Modifying 'OS/2' table")
+    modifiedFont["OS/2"].xAvgCharWidth = 500    #Monospaced
 
-    print ("["+str(font).split("/")[1][:-4]+"] Making other changes")
+    print ("["+str(font).split("/")[1][:-4]+"] Modifying 'name' table")
     modifiedFont["name"].addMultilingualName({'ja':'ドットゴシック16'}, modifiedFont, nameID = 1, windows=True, mac=False)
     modifiedFont["name"].addMultilingualName({'ja':'Regular'}, modifiedFont, nameID = 2, windows=True, mac=False)
+    
+    print ("["+str(font).split("/")[1][:-4]+"] Modifying 'head' table")
     modifiedFont["head"].flags |= 1 << 3        #sets flag to always round PPEM to integer
 
     GASP_set(modifiedFont)
