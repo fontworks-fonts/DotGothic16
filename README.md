@@ -36,6 +36,15 @@ If the **--autohinting** command line option is specified, it will add hinting w
     $ python build.py --autohinting
 
 
+### DotGothic16 Proportional
+
+**build.py** also writes a second family, **DotGothic16 Proportional**, to `fonts/ttf/DotGothic16Proportional-Regular.ttf` .
+
+DotGothic16 is duo-spaced: every half-width glyph sits in a fixed 500-unit (8-dot) cell, so the narrow ones carry a lot of blank space -- `l` is 73 units of ink with 213 units of blank on each side. The proportional family respaces those 296 Latin and punctuation glyphs from their own ink, on the 62.5-unit dot grid. No outline is redrawn and no glyph leaves the grid.
+
+DotGothic16-Regular is unchanged. The full-width glyphs, and the `.half` forms reached through `hwid`, keep their fixed widths in both families, and figures stay tabular. The spacing is set by `TRACKING_COLS` in **proportional.py** , the number of blank dot columns given to each glyph.
+
+
 ### Licence
 
 This font is licensed under the [SIL Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL).

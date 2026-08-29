@@ -4,6 +4,8 @@ from fontTools.ttLib import TTFont, newTable
 import shutil, subprocess, glob, sys
 from pathlib import Path
 
+import proportional
+
 print ("[DotGothic16] Generating TTF")
 __main__.main(("-g","sources/DotGothic16.glyphs", "-o","ttf",))
 
@@ -34,7 +36,11 @@ for font in Path("master_ttf").glob("*.ttf"):
     modifiedFont["head"].flags |= 1 << 3        #sets flag to always round PPEM to integer
 
     GASP_set(modifiedFont)
-    modifiedFont.save("fonts/ttf/"+str(font).split("/")[1])
+    builtFont = "fonts/ttf/"+str(font).split("/")[1]
+    modifiedFont.save(builtFont)
+
+    print ("["+str(font).split("/")[1][:-4]+"] Building the proportional family")
+    proportional.make(builtFont, builtFont.replace("DotGothic16-", "DotGothic16Proportional-"))
 
 shutil.rmtree("instance_ufo")
 shutil.rmtree("master_ufo")
